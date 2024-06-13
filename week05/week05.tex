@@ -1,0 +1,503 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{ascmac}
+\usepackage{bm}
+\theoremstyle{plain}
+\newtheorem{dfn}{Definition}[subsection]
+\title{Matrix Algebra Marathon}
+\author{J2200071 Ryuto Saito}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Derivatives of Function of Matrices}
+
+
+\subsection{Definition}
+
+\begin{dfn}
+	We denote the derivative of a function $f:\mathbb{R}^{m \times n} \rightarrow \mathbb{R}$ by
+	\begin{equation*}
+		\nabla_{\bm{X}} f(\bm{X}) \coloneq
+		\begin{bmatrix}
+			\nabla_{X_{1,1}} (f(\bm{X})) & \cdots & \nabla_{X_{1,n}} (f(\bm{X})) \\
+			\vdots & \ddots & \vdots \\
+			\nabla_{X_{m,1}} (f(\bm{X})) & \cdots & \nabla_{X_{m,n}} (f(\bm{X}))
+		\end{bmatrix} . \\
+	\end{equation*}
+\end{dfn}
+
+
+\subsection{Exercise}
+
+
+\begin{itembox}[l]{Exercise 2.14.2.}
+	Let
+	\begin{math}
+		\bm{X} , \bm{A} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	Show that
+	\begin{equation}
+		\nabla_{\bm{X}} (tr(\bm{A}^{\mathrm{T}} \bm{X})) = \bm{A} .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{X} , \bm{A} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	Recall the definition of inner-product of matrices and
+	\begin{equation*}
+		\langle \bm{X} , \bm{Y} \rangle = tr(\bm{X}^\mathrm{T} \bm{Y}) .
+	\end{equation*}
+	\begin{equation*}
+		\begin{split}
+			\nabla_{\bm{X}} (tr(\bm{A}^{\mathrm{T}} \bm{X})) &=
+			\begin{bmatrix}
+				\nabla_{X_{1,1}} tr(\bm{A}^\mathrm{T} \bm{X}) & \cdots & \nabla_{X_{1,n}} tr(\bm{A}^\mathrm{T} \bm{X}) \\
+				\vdots & \ddots & \vdots \\
+				\nabla_{X_{m,1}} tr(\bm{A}^\mathrm{T} \bm{X}) & \cdots & \nabla_{X_{m,n}} tr(\bm{A}^\mathrm{T} \bm{X})
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				\nabla_{X_{1,1}} \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} X_{i,j} \right) & \cdots & \nabla_{X_{1,n}} \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} X_{i,j} \right) \\
+				\vdots & \ddots & \vdots \\
+				\nabla_{X_{m,1}} \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} X_{i,j} \right) & \cdots & \nabla_{X_{m,n}} \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} X_{i,j} \right)
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				A_{1,1} & \cdots & A_{1,n} \\
+				\vdots & \ddots & \vdots \\
+				A_{m,1} & \cdots & A_{m,n}
+			\end{bmatrix} \\
+			&= \bm{A}
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.14.4.}
+	Let
+	\begin{math}
+		\bm{X} , \bm{A} , \bm{B} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	Show that
+	\begin{equation}
+		\nabla_{\bm{X}} (tr(\bm{A}^\mathrm{T} (\bm{X} + \bm{B}))) = \bm{A} .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{X} , \bm{A} , \bm{B} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			&\nabla_{\bm{X}} (tr(\bm{A}^{\mathrm{T}} (\bm{X} + \bm{B}))) \\
+			&=
+			\begin{bmatrix}
+				\nabla_{X_{1,1}} (tr(\bm{A}^{\mathrm{T}} (\bm{X} + \bm{B}))) & \cdots & \nabla_{X_{1,n}} (tr(\bm{A}^{\mathrm{T}} (\bm{X} + \bm{B}))) \\
+				\vdots & \ddots & \vdots \\
+				\nabla_{X_{m,1}} (tr(\bm{A}^{\mathrm{T}} (\bm{X} + \bm{B}))) & \cdots & \nabla_{X_{m,n}} (tr(\bm{A}^{\mathrm{T}} (\bm{X} + \bm{B}))) \\
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				\nabla_{X_{1,1}} \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} (X_{i,j} + B_{i,j}) \right) & \cdots & \nabla_{X_{1,n}} \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} (X_{i,j} + B_{i,j}) \right) \\
+				\vdots & \ddots & \vdots \\
+				\nabla_{X_{m,1}} \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} (X_{i,j} + B_{i,j}) \right) & \cdots & \nabla_{X_{m,n}} \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} (X_{i,j} + B_{i,j}) \right) \\
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				A_{1,1} & \cdots & A_{1,n} \\
+				\vdots & \ddots & \vdots \\
+				A_{m,1} & \cdots & A_{m,n}
+			\end{bmatrix} \\
+			&= \bm{A}
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+
+\section{Derivatives of Matrix-Valued Functions}
+
+
+\subsection{Definition}
+
+\begin{dfn}
+	Consider a matrix-valued function $\bm{F}:\mathbb{R} \rightarrow \mathbb{R}^{m \times n}$
+	expressed as
+	\begin{equation*}
+		\bm{F}(x) \coloneq
+		\begin{bmatrix}
+			F_{1,1}(x) & \cdots & F_{1,n}(x) \\
+			\vdots & \ddots & \vdots \\
+			F_{m,1}(x) & \cdots & F_{m,n}(x)
+		\end{bmatrix} .
+	\end{equation*}
+	The derivative of the function is denoted by
+	\begin{equation*}
+		\nabla_{x} \bm{F}(x) \coloneq
+		\begin{bmatrix}
+			\nabla_x F_{1,1}(x) & \cdots & \nabla_x F_{1,n}(x) \\
+			\vdots & \ddots & \vdots \\
+			\nabla_x F_{m,1}(x) & \cdots & \nabla_x F_{m,n}(x)
+		\end{bmatrix} .
+	\end{equation*}
+\end{dfn}
+
+
+\subsection{Exercise}
+
+
+\begin{itembox}[l]{Exercise 2.15.3.}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{m \times n}
+	\end{math}
+	and
+	\begin{math}
+		\bm{F}:\mathbb{R} \rightarrow \mathbb{R}^{m \times n} .
+	\end{math}
+	Show that
+	\begin{equation}
+		\nabla_x \langle \bm{A} , \bm{F}(x) \rangle = \langle \bm{A} , \nabla_x \bm{F}(x) \rangle .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{m \times n}
+	\end{math}
+	and
+	\begin{math}
+		\bm{F}:\mathbb{R} \rightarrow \mathbb{R}^{m \times n} .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\nabla_x \langle \bm{A} , \bm{F}(x) \rangle &= \nabla_x \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} F_{i,j}(x) \right) \\
+			&= \left( \sum_{i=1}^m \sum_{j=1}^n A_{i,j} \nabla_x  F_{i,j}(x) \right) \\
+			&= \langle \bm{A} , \nabla_x \bm{F}(x) \rangle
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.15.5.}
+	Let $\bm{F}:\mathbb{R} \rightarrow \mathbb{R}^{m \times k}$
+	and $\bm{G}:\mathbb{R} \rightarrow \mathbb{R}^{k \times n}$. Show that
+	\begin{equation}
+		\label{ex2155}
+		\nabla_x (\bm{F}(x) \bm{G}(x)) = (\nabla_x \bm{F}(x)) \bm{G}(x) + \bm{F}(x) \nabla_x \bm{G}(x) .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Let $\bm{F}:\mathbb{R} \rightarrow \mathbb{R}^{m \times k}$
+	and $\bm{G}:\mathbb{R} \rightarrow \mathbb{R}^{k \times n}$ .
+	For all
+	\begin{math}
+		i \in \mathbb{N}_m
+	\end{math}
+	and
+	\begin{math}
+		j \in \mathbb{N}_n ,
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			(\nabla_x (\bm{F}(x) \bm{G}(x)))_{i,j} &= \nabla_x (\bm{F}(x) \bm{G}(x))_{i,j} \\
+			&= \nabla_x \left( \sum_{l=1}^k F_{i,l}(x) G_{l,j}(x) \right) \\
+			&= \sum_{l=1}^k ((\nabla_x F_{i,l}(x)) G_{l,j}(x) + F_{i,l}(x) (\nabla_x G_{l,j}(x))) \\
+			&= \sum_{l=1}^k (\nabla_x F_{i,l}(x)) G_{l,j}(x) + \sum_{l=1}^k F_{i,l}(x) \nabla_x G_{l,j}(x) \\
+			&= \sum_{l=1}^k (\nabla_x \bm{F}(x))_{i,l} G_{l,j}(x) + \sum_{l=1}^k F_{i,l}(x) (\nabla_x \bm{G}(x))_{l,j} \\
+			&= ((\nabla_x \bm{F}(x)) \bm{G}(x))_{i,j} + (\bm{F}(x) \nabla_x \bm{G}(x))_{i,j} \\
+			&= ((\nabla_x \bm{F}(x)) \bm{G}(x) + \bm{F}(x) \nabla_x \bm{G}(x))_{i,j} .
+		\end{split}
+	\end{equation*}
+	Therefore, $(\ref{ex2155})$ holds.
+\end{proof}
+
+
+\section{Diagonal Matrices}
+
+\subsection{Definition}
+
+\begin{dfn}
+	A diagonal matrix is a square matrix whose all the off-diagonal entries are zero.
+	Such a matrix with diagonal entries $\bm{d} \coloneq \lbrack d_1 , \ldots , d_n \rbrack^\mathrm{T} \in \mathbb{R}^n$
+	is denoted by
+	\begin{equation*}
+		diag(\bm{d}) \coloneq
+		\begin{bmatrix}
+			d_1 & 0 & \cdots & 0 \\
+			0 & d_2 & \cdots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \cdots & d_n
+		\end{bmatrix}
+	\end{equation*}
+\end{dfn}
+
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.16.3.}
+	Let
+	\begin{math}
+		\bm{x} , \bm{y} \in \mathbb{R}^n .
+	\end{math}
+	Show that
+	\begin{equation}
+		\label{ex2163}
+		diag(\bm{x}) diag(\bm{y}) = diag(\bm{y}) diag(\bm{x}) .
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{x} , \bm{y} \in \mathbb{R}^n .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			diag(\bm{x}) diag(\bm{y}) &=
+			\begin{bmatrix}
+				x_1 &  & \bm{O} \\
+				& \ddots & \\
+				\bm{O} & & x_n
+			\end{bmatrix}
+			\begin{bmatrix}
+				y_1 &  & \bm{O} \\
+				& \ddots & \\
+				\bm{O} & & y_n
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				x_1 y_1 &  & \bm{O} \\
+				& \ddots & \\
+				\bm{O} & & x_n y_n
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				y_1 x_1 &  & \bm{O} \\
+				& \ddots & \\
+				\bm{O} & & y_n x_n
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				y_1 &  & \bm{O} \\
+				& \ddots & \\
+				\bm{O} & & y_n
+			\end{bmatrix}
+			\begin{bmatrix}
+				x_1 &  & \bm{O} \\
+				& \ddots & \\
+				\bm{O} & & x_n
+			\end{bmatrix} \\
+			&=
+			diag(\bm{y}) diag(\bm{x})
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+
+\section{Orthonormal Matrices}
+
+\subsection{Definition}
+
+\begin{dfn}
+	An $m \times n$ matrix $\bm{P}$ is said to be orthonormal if the matrix satisfies
+	\begin{math}
+		\bm{P}^\mathrm{T} \bm{P} = \bm{I}_n .
+	\end{math}
+	Symbol
+	\begin{math}
+		\mathbb{O}^{m \times n}
+	\end{math}
+	is used to denote the set of $m \times n$ orthonormal matrices.
+\end{dfn}
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.17.2.}
+	Let
+	\begin{math}
+		\bm{P} = \lbrack \bm{p}_1 , \ldots , \bm{p}_n \rbrack \in \mathbb{O}^{m \times n} .
+	\end{math}
+	Show that
+	\begin{math}
+		\forall i , \forall j \in \mathbb{N}_n ,
+	\end{math}
+	\begin{equation}
+		\label{ex2172}
+		\langle \bm{p}_i , \bm{p}_j \rangle = \delta_{i,j}
+	\end{equation}
+	where $\delta_{i,j}$ is the Kronecker delta.
+\end{itembox}
+
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{P} = \lbrack \bm{p}_1 , \ldots , \bm{p}_n \rbrack \in \mathbb{O}^{m \times n}
+	\end{math}
+	and
+	\begin{math}
+		i , j \in \mathbb{N}_n .
+	\end{math}
+	
+	\begin{equation*}
+		\begin{split}
+			(\bm{P}^{\mathrm{T}} \bm{P})_{i,j} &= \sum_{k=1}^m (\bm{P}^{\mathrm{T}})_{i,k} P_{k,j} \\
+			&= \sum_{k=1}^m \bm{P}_{k,i} P_{k,j} \\
+			&= \langle \bm{p}_i , \bm{p}_j \rangle
+		\end{split}
+	\end{equation*}
+	Furthermore,
+	\begin{equation*}
+		\begin{split}
+			(\bm{I}_n)_{i,j} &=
+			\begin{cases}
+				1 & (i=j) \\
+				0 & (i \neq j)
+			\end{cases} \\
+			&= \delta_{i,j}
+		\end{split}
+	\end{equation*}
+	Thus, since $\bm{P}^{\mathrm{T}} \bm{P} = \bm{I}_n$,
+	\begin{equation*}
+		\langle \bm{p}_i , \bm{p}_j \rangle = (\bm{P}^{\mathrm{T}} \bm{P})_{i,j} = (\bm{I}_n)_{i,j} = \delta_{i,j} .
+	\end{equation*}
+	Then, we get $(\ref{ex2172})$.
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.17.4.}
+	Let
+	\begin{math}
+		\bm{P} \in \mathbb{O}^{n \times n} .
+	\end{math}
+	Show that
+	\begin{equation}
+		\label{ex2174}
+		\bm{P}^{\mathrm{T}} = \bm{P}^{-1} .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{P} \in \mathbb{O}^{n \times n} .
+	\end{math}
+	Since
+	\begin{math}
+		\bm{P} \in \mathbb{O}^{n \times n},
+	\end{math}
+	\begin{equation*}
+		\bm{P}^{\mathrm{T}} \bm{P} = \bm{I}_n .
+	\end{equation*}
+	Recall the definition of inverse of square matrices. Then, we get
+	\begin{equation*}
+		\bm{P}^{-1} = \bm{P}^{\mathrm{T}} .
+	\end{equation*}
+	Thus, $(\ref{ex2174})$ holds.
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.17.6.}
+	Let
+	\begin{math}
+		\bm{P} \in \mathbb{O}^{ n \times n} .
+	\end{math}
+	Show that
+	\begin{equation}
+		\label{ex2176}
+		det ({\bm{P}}) \in \{ \pm 1 \} .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{P} \in \mathbb{O}^{ n \times n} .
+	\end{math}
+	Recall that $det(\bm{AB}) = det(\bm{A}) det(\bm{B})$ and
+	$det(\bm{A}^{\mathrm{T}}) = det(\bm{A})$ for $\bm{A} , \bm{B} \in \mathbb{R}^{n \times n}$.
+	Then, 
+	\begin{equation*}
+		det(\bm{P}^{\mathrm{T}} \bm{P}) = det(\bm{P}^{\mathrm{T}}) det(\bm{P}) = det(\bm{P}) det(\bm{P}) = (det(\bm{P}))^2 .
+	\end{equation*}
+	Recall that
+	\begin{equation*}
+		det(\bm{I}_n) = 1 .
+	\end{equation*}
+	Then, from the definition of orthonormal matrices,
+	\begin{equation*}
+		(det(\bm{P}))^2 = det(\bm{P}^{\mathrm{T}} \bm{P}) = det(\bm{I}_n) = 1 .
+	\end{equation*}
+	By solving this equation, we have
+	\begin{math}
+		det(\bm{P}) = \pm 1 .
+	\end{math}
+	Hence, $det(\bm{P}) \in \{\pm 1\}$ .
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.17.8.}
+	Let
+	\begin{math}
+		\bm{P} \in \mathbb{O}^{m \times k}
+	\end{math}
+	and
+	\begin{math}
+		\bm{Q} \in \mathbb{O}^{k \times n}
+	\end{math}
+	where $m \geq k \geq n$. Show that $\bm{PQ} \in \mathbb{O}^{m \times n}$.
+	
+	
+\end{itembox}
+
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{P} \in \mathbb{O}^{m \times k}
+	\end{math}
+	and
+	\begin{math}
+		\bm{Q} \in \mathbb{O}^{k \times n}
+	\end{math}
+	where $m \geq k \geq n$.
+	Since $\bm{P} \in \mathbb{O}^{m \times k}$,
+	\begin{equation*}
+		\bm{P}^{\mathrm{T}} \bm{P} = \bm{I}_k .
+	\end{equation*}
+	Similarly,
+	\begin{equation*}
+		\bm{Q}^{\mathrm{T}} \bm{Q} = \bm{I}_n .
+	\end{equation*}
+	Then,
+	\begin{equation*}
+		\begin{split}
+			(\bm{PQ})^{\mathrm{T}} \bm{PQ} &= \bm{Q}^{\mathrm{T}} \bm{P}^{\mathrm{T}} \bm{PQ} \\
+			&= \bm{Q}^{\mathrm{T}} (\bm{P}^{\mathrm{T}} \bm{P}) \bm{Q} \\
+			&= \bm{Q}^{\mathrm{T}} \bm{I}_k \bm{Q} \\
+			&= \bm{Q}^{\mathrm{T}} \bm{Q} \\
+			&= \bm{I}_n .
+		\end{split}
+	\end{equation*}
+	Hence, $\bm{PQ} \in \mathbb{O}^{m \times n}$.
+\end{proof}
+
+\end{document}

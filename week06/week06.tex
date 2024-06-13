@@ -1,0 +1,531 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{ascmac}
+\usepackage{bm}
+\theoremstyle{plain}
+\newtheorem{dfn}{Definition}[subsection]
+\title{Matrix Algebra Marathon}
+\author{J2200071 Ryuto Saito}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Spectral Decomposition}
+
+
+\subsection{Definition}
+
+\begin{dfn}\label{dfn1}
+	Let
+	$\bm{A} \in \mathbb{S}^n$. 
+	Denote the spectral decomposition of $\bm{A} \in \mathbb{S}^n$
+	by $\bm{A} = \bm{U} \bm{\Lambda} \bm{U}^{\mathrm{T}}$.
+	Let $\lambda_i$  be the $i$-th diagonal entry of $\bm{\Lambda}$.
+	The matrix power of $\bm{A}$ by $p \in \mathbb{R}$ is defined as
+	\begin{equation*}
+		\bm{A}^p \coloneq \bm{U} \bm{\Lambda}^p \bm{U}^{\mathrm{T}}
+	\end{equation*}
+	where
+	\begin{equation*}
+		\bm{\Lambda}^p = diag(\lbrack \lambda_1^p , \ldots , \lambda_n^p \rbrack) .
+	\end{equation*}
+\end{dfn}
+
+
+\subsection{Theorem}
+
+\begin{itembox}[l]{Theorem 2.18.1.}
+	For any $\bm{A} \in \mathbb{S}^n$, there exist $\bm{U} \in \mathbb{O}^{n \times n}$
+	and $\bm{\lambda} \in \mathbb{R}^n$ such that
+	\begin{equation}
+		\label{thm2181}
+		\bm{A} = \bm{U} \bm{\Lambda} \bm{U}^\mathrm{T}
+	\end{equation}
+	where $\bm{\Lambda} \coloneq diag(\bm{\lambda})$.
+	This is said to be the spectral decomposition.
+	In this note, we assume $\lambda_1 \geq \cdots \geq \lambda_n$ without loss of generality.
+	Each entry of $\bm{\lambda}$ is called an eigenvalue, and each column of $\bm{U}$ is called an eigenvector.
+\end{itembox}
+
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.18.4.}
+	Denote the spectral decomposition of $\bm{A} \in \mathbb{S}^n$ by $\bm{A} = \bm{U} \bm{\Lambda} \bm{U}^{\mathrm{T}}$.
+	Let $\lambda_i$ be the $i$-th diagonal enrty of $\Lambda$ and $\bm{u}_i$ be the $i$-th column in $\bm{U}$.
+	Then, show that $\forall i \in \mathbb{N}_n$,
+	\begin{equation}
+		\label{ex2184}
+		\bm{u}_i^{\mathrm{T}} \bm{A} \bm{u}_i = \lambda_i .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Since $\bm{U} \in \mathbb{O}^{n \times n} ,$
+	\begin{equation*}
+		\bm{u}_i^{\mathrm{T}} \bm{u}_j =
+		\begin{cases}
+			1 & (j=i)\\
+			0 & (j \neq i)
+		\end{cases} .
+	\end{equation*}
+	Thus,
+	\begin{equation*}
+		\begin{split}
+			\bm{u}_i^{\mathrm{T}} \bm{A} \bm{u}_i &= \bm{u}_i^{\mathrm{T}} \bm{U} \bm{\Lambda} \bm{U}^{\mathrm{T}} \bm{u}_i \\
+			&= (\bm{u}_i^{\mathrm{T}} \bm{U}) \bm{\Lambda} (\bm{U}^{\mathrm{T}} \bm{u}_i) \\
+			&= (\bm{u}_i^{\mathrm{T}} \bm{U}) \bm{\Lambda} (\bm{u}_i^{\mathrm{T}} \bm{U})^{\mathrm{T}} \\
+			&= (\bm{u}_i^{\mathrm{T}} \lbrack \bm{u}_1 , \ldots , \bm{u}_n \rbrack) \bm{\Lambda} (\bm{u}_i^{\mathrm{T}} \lbrack \bm{u}_1 , \ldots , \bm{u}_n \rbrack)^{\mathrm{T}} \\
+			&= (\lbrack \bm{u}_i^{\mathrm{T}} \bm{u}_1 , \ldots , \bm{u}_i^{\mathrm{T}} \bm{u}_n \rbrack) \bm{\Lambda} (\lbrack \bm{u}_i^{\mathrm{T}} \bm{u}_1 , \ldots , \bm{u}_i^{\mathrm{T}} \bm{u}_n \rbrack)^{\mathrm{T}} \\
+			&= \bm{e}_i^{\mathrm{T}} \bm{\Lambda} (\bm{e}_i^{\mathrm{T}})^{\mathrm{T}} \\
+			&= \bm{e}_i^{\mathrm{T}} \bm{\Lambda} \bm{e}_i \\
+			&= \bm{e}_i^{\mathrm{T}} (\bm{\Lambda} \bm{e}_i) \\
+			&= \bm{e}_i^{\mathrm{T}}
+			\begin{bmatrix}
+				0 \\
+				\vdots \\
+				0 \\
+				\lambda_i \\
+				0 \\
+				\vdots \\
+				0
+			\end{bmatrix} \\
+			&= \lambda_i .
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.18.6.}
+	Denote the spectral decomposition of $\bm{A} \in \mathbb{S}^n$ by $\bm{U} \bm{\Lambda} \bm{U}^{\mathrm{T}}$.
+	Show that
+	\begin{equation}
+		\label{ex2186}
+		tr(\bm{A}) = tr(\bm{\Lambda}) .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Recall that $tr(\bm{B} \bm{C}) = tr(\bm{C} \bm{B})$. Then,
+	\begin{equation}
+		\label{ex2186sub0}
+		tr(\bm{A}) = tr(\bm{U} \bm{\Lambda} \bm{U}^{\mathrm{T}}) = tr(\bm{U} (\bm{\Lambda} \bm{U}^{\mathrm{T}}))
+		= tr((\bm{\Lambda} \bm{U}^{\mathrm{T}}) \bm{U}) = tr(\bm{\Lambda} \bm{U}^{\mathrm{T}} \bm{U}) .
+	\end{equation}
+	Since $\bm{U}$ is orthonormal,
+	\begin{equation}
+		\label{ex2186sub1}
+		\bm{U}^{\mathrm{T}} \bm{U} = \bm{I}_n .
+	\end{equation}
+	Substitute $(\ref{ex2186sub1})$ into $(\ref{ex2186sub0})$, we get
+	\begin{equation*}
+		tr(\bm{A}) = tr(\bm{\Lambda} \bm{U}^{\mathrm{T}} \bm{U})
+		= tr(\bm{\Lambda} \bm{I}_n) =  tr(\bm{\Lambda}) .
+	\end{equation*}
+	Hence, $(\ref{ex2186})$ holds.
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.18.9.}
+	Denote the spectral decomposition of $\bm{A} \in \mathbb{S}^n$ by $\bm{A} = \bm{U} \bm{\Lambda} \bm{U}^{\mathrm{T}}$.
+	Let $\lambda_i$ be the $i$-th diagonal entry of $\bm{\Lambda}$. For $\forall p \in \mathbb{R}$, show that
+	\begin{equation}
+		\label{ex2189}
+		tr(\bm{A}^p) = \sum_{i=1}^n \lambda_i^p .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	By definition \ref{dfn1}, we have
+	\begin{equation}
+		\label{ex2189sub0}
+		\bm{A}^p = \bm{U} \bm{\Lambda}^p \bm{U}^{\mathrm{T}}
+	\end{equation}
+	where
+	\begin{equation*}
+		\bm{\Lambda}^p = diag(\lbrack \lambda_1^p , \ldots , \lambda_n^p \rbrack) .
+	\end{equation*}
+	Since $tr(\bm{BC}) = tr(\bm{CB})$,
+	\begin{equation*}
+		\begin{split}
+			tr(\bm{A}^p) &= tr(\bm{U} \bm{\Lambda}^p \bm{U}^{\mathrm{T}}) \\
+			&= tr(\bm{U} (\bm{\Lambda}^p \bm{U}^{\mathrm{T}})) \\
+			&= tr((\bm{\Lambda}^p \bm{U}^{\mathrm{T}}) \bm{U}) \\
+			&= tr(\bm{\Lambda}^p (\bm{U}^{\mathrm{T}} \bm{U}))
+		\end{split}
+	\end{equation*}
+	Thus,
+	\begin{equation}
+		\label{ex2189sub1}
+		tr(\bm{A}^p) = tr(\bm{\Lambda}^p (\bm{U}^{\mathrm{T}} \bm{U})) .
+	\end{equation}
+	Substitute (\ref{ex2186sub1}) into (\ref{ex2189sub1}), we get
+	\begin{equation*}
+		tr(\bm{A}^p) = tr(\bm{\Lambda}^p (\bm{U}^{\mathrm{T}} \bm{U})) = tr(\bm{\Lambda}^p) = \sum_{i=1}^n \lambda_i^p .
+	\end{equation*}
+\end{proof}
+
+
+\section{Positive Definite Matrices}
+
+\subsection{Definition}
+
+\begin{dfn}
+	An $n \times n$ symmetric matrix is said to be positive semi-definite
+	if $\forall \bm{x} \in \mathbb{R}^n$,
+	\begin{equation}
+		\label{dfn_semi-definite}
+		\bm{x}^{\mathrm{T}} \bm{A} \bm{x} \geq 0 .
+	\end{equation}
+\end{dfn}
+
+\begin{dfn}
+	An $n \times n$ symmetric matrix is said to be strictly positive definite
+	if $\forall \bm{x} \in \mathbb{R}^n$,
+	\begin{equation}
+		\label{dfn_definite}
+		\bm{x} \neq \bm{0}_n \implies \bm{x}^{\mathrm{T}} \bm{A} \bm{x} > 0 .
+	\end{equation}
+\end{dfn}
+
+
+\begin{itembox}[l]{Exercise 2.19.4.}
+	For any $\bm{A} \in \mathbb{S}_{++}^n$ and $\bm{x} \in \mathbb{R}^n$,
+	show that,
+	\begin{equation}
+		\label{ex2194}
+		\bm{x}^{\mathrm{T}} \bm{A} \bm{x} > 0 \implies \bm{x} \neq \bm{0}_n .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Let $\bm{A} \in \mathbb{S}_{++}^n$ and $\bm{x} \in \mathbb{R}^n$.
+	Suppose that $\bm{x} = \bm{0}_n$. Then,
+	\begin{equation*}
+		\bm{x}^{\mathrm{T}} \bm{A} \bm{x} = \bm{0}^{\mathrm{T}} \bm{A} \bm{0}
+		= 0 \leq 0 .
+	\end{equation*}
+	Therefore, we get
+	\begin{equation*}
+		\bm{x} = \bm{0}_n \implies \bm{x}^{\mathrm{T}} \bm{A} \bm{x} \leq 0 .
+	\end{equation*}
+	That is
+	\begin{equation*}
+		\bm{x}^{\mathrm{T}} \bm{A} \bm{x} > 0 \implies \bm{x} \neq \bm{0}_n .
+	\end{equation*}
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.19.6.}
+	For $\forall \bm{A} \in \mathbb{S}_{++}^n$, every eigen-value is positive.
+\end{itembox}
+
+
+\begin{proof}
+	From Theorem 2.18.1., for any $\bm{A} \in \mathbb{S}^n$,
+	there exist $\bm{U} = \lbrack \bm{u}_1 , \ldots , \bm{u}_n \rbrack \in \mathbb{O}^{n \times n}$
+	and $\bm{\lambda} \in \mathbb{R}^n$
+	such that
+	\begin{equation*}
+		\bm{A} = \bm{U} \bm{\Lambda} \bm{U}^{\mathrm{T}}
+	\end{equation*}
+	where $\bm{u}_i$ is one of the eigenvectors of $\bm{A}$ and $\lambda_i$ is the eigenvalue for $\bm{u}_i$.
+	Recall that
+	\begin{equation}
+		\label{ex2196sub0}
+		\forall i \in \mathbb{N}_n, \bm{u}_i^{\mathrm{T}} \bm{A} \bm{u}_i = \lambda_i.
+	\end{equation}
+	Since $\bm{A} \in \mathbb{S}_{++}^n$, we have
+	\begin{equation}
+		\label{ex2196sub1}
+		\forall \bm{x} \in \mathbb{R}^n, \bm{x} \neq \bm{0}_n \implies \bm{x}^{\mathrm{T}} \bm{A} \bm{x} > 0 .
+	\end{equation}
+	By definition, eigenvectors are non-zero. So, from (\ref{ex2196sub1}), we get
+	\begin{equation}
+		\label{ex2196sub2}
+		\forall i \in \mathbb{N}_n, \bm{u}_i^{\mathrm{T}} \bm{A} \bm{u}_i > 0 .
+	\end{equation}
+	Substitute (\ref{ex2196sub0}) into (\ref{ex2196sub2}), then
+	\begin{equation*}
+		\forall i \in \mathbb{N}_n, \lambda_i > 0 .
+	\end{equation*}
+	Therefore, for $\forall \bm{A} \in \mathbb{S}_{++}^n$, every eigen-value is positive.
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.19.8.}
+	Let $\bm{A}$ be an $n \times n$ symmetric matrix. Denote its spectral decomposition
+	by $\bm{A} =  \bm{U} diag(\bm{\lambda}) \bm{U}^{\mathrm{T}}$,
+	where $\bm{U} \in \mathbb{O}^{n \times n}$ and $\bm{\lambda} \in \mathbb{R}^n$.
+	Show that the matrix $\bm{A}$ is strictly positive definite if $\bm{\lambda} > 0$.
+\end{itembox}
+
+
+\begin{proof}
+	Let $\bm{x} \in \mathbb{R}^n$. Suppose that $\bm{x} \neq \bm{0}$.
+	Denote by $\bm{u}_i$ $i$-th column in $\bm{U}$, and let $\bm{z} \coloneq \bm{U}^{\mathrm{T}} \bm{x}$.
+	Since $\bm{U} \bm{U}^{\mathrm{T}} = \bm{I}_n$ for $\bm{U} \in \mathbb{O}^{n \times n}$ from Exercise 2.17.5.,
+	\begin{equation*}
+		\begin{split}
+			\lVert \bm{z} \rVert &= \sqrt{\langle \bm{z} , \bm{z} \rangle} \\
+			&= \sqrt{\bm{z}^{\mathrm{T}} \bm{z}} \\
+			&= \sqrt{(\bm{U}^{\mathrm{T}} \bm{x})^{\mathrm{T}} \bm{U}^{\mathrm{T}} \bm{x}} \\
+			&= \sqrt{\bm{x}^{\mathrm{T}} \bm{U} \bm{U}^{\mathrm{T}} \bm{x}} \\
+			&= \sqrt{\bm{x}^{\mathrm{T}} \bm{x}} \\
+			&= \sqrt{\langle \bm{x} , \bm{x} \rangle} \\
+			&= \lVert \bm{x} \rVert \geq 0 .
+		\end{split}
+	\end{equation*}
+	From Exercise 2.2.6., since $\bm{x} \neq \bm{0}$, we get $\lVert \bm{x} \rVert \neq 0$.
+	Hence,
+	\begin{equation*}
+		\lVert \bm{z} \rVert = \lVert \bm{x} \rVert > 0 .
+	\end{equation*}
+	Since $\lVert \bm{z} \rVert \neq 0$, $\bm{z} \neq \bm{0}$.
+	From Exercise 2.18.3.,
+	\begin{equation*}
+		\bm{A} = \sum_{i=1}^n \lambda_i \bm{u}_i \bm{u}_i^{\mathrm{T}} .
+	\end{equation*}
+	Then,
+	\begin{equation*}
+		\begin{split}
+			\bm{x}^{\mathrm{T}} \bm{A} \bm{x} &= \bm{x}^{\mathrm{T}} \left( \sum_{i=1}^n \lambda_i \bm{u}_i \bm{u}_i^{\mathrm{T}} \right) \bm{x} \\
+			&= \sum_{i=1}^n \lambda_i \bm{x}^{\mathrm{T}} \bm{u}_i \bm{u}_i^{\mathrm{T}} \bm{x} \\
+			&= \sum_{i=1}^n \lambda_i \langle \bm{x} , \bm{u}_i \rangle \langle \bm{u}_i , \bm{x} \rangle \\
+			&= \sum_{i=1}^n \lambda_i \langle \bm{u}_i , \bm{x} \rangle \langle \bm{u}_i , \bm{x} \rangle \\
+			&= \sum_{i=1}^n \lambda_i \langle \bm{u}_i , \bm{x} \rangle^2 \\
+			&= \sum_{i=1}^n \lambda_i z_i^2 .
+		\end{split}
+	\end{equation*}
+	Since $\bm{\lambda} > \bm{0}$ and $\bm{z} \neq \bm{0}$,
+	\begin{equation*}
+		\forall i \in \mathbb{N}_n, \lambda_i > 0
+	\end{equation*}
+	and
+	\begin{equation*}
+		\exists k \in \mathbb{N}_n, z_k \neq 0 .
+	\end{equation*}
+	Thus,
+	\begin{equation*}
+		\bm{x}^{\mathrm{T}} \bm{A} \bm{x} = \sum_{i=1}^n \lambda_i z_i^2 \geq \lambda_k z_k^2 > 0 .
+	\end{equation*}
+	Therefore, the matrix $\bm{A}$ is strictly positive definite if $\bm{\lambda} > 0$.
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.19.10.}
+	Show that the determinant of every strictly positive definite matrix is strictry positive.
+\end{itembox}
+
+
+\begin{proof}
+	Let $\bm{A} \in \mathbb{S}_{++}^n$. Denote the spectral decomposition of $\bm{A}$ by
+	$\bm{A} = \bm{U} \bm{\Lambda} \bm{U}^\mathbb{T}$. Let $\lambda_i$ be the $i$-th diagonal
+	entry of $\bm{\Lambda}$.
+	Recall that for $\forall \bm{A} \in \mathbb{S}_{++}^n$, every eigen-value is positive. Then,
+	\begin{equation}
+		\label{ex21910sub0}
+		\forall i \in \mathbb{N}_n, \lambda_i > 0 .
+	\end{equation}
+	Moreover, from Exercise 2.18.7., we have
+	\begin{equation}
+		\label{ex21910sub1}
+		det(\bm{A}) = \prod_{i=1}^n \lambda_i .
+	\end{equation}
+	Hence, from (\ref{ex21910sub0}),
+	\begin{equation*}
+		det(\bm{A}) = \prod_{i=1}^n \lambda_i > 0 .
+	\end{equation*}
+	Therefore, the determinant of every strictly positive definite matrix is strictry positive.
+\end{proof}
+
+
+\section{Hadamard Product}
+
+\subsection{Definition}
+
+\begin{dfn}
+	Let $\bm{X} , \bm{Y} \in \mathbb{R}^{m \times n}$. The Hadamard product between
+	$\bm{X}$ and $\bm{Y}$, denote by $\bm{Z}$, is defined as
+	\begin{equation}
+		\label{dfn_hadamard}
+		\bm{Z} = \bm{X} \bigodot \bm{Y} \iff \forall i \in \mathbb{N}_m , \forall j \in \mathbb{N}_n ,
+		Z_{i,j} = X_{i,j} Y_{i,j} .
+	\end{equation}
+\end{dfn}
+
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.20.3.}
+	Let $\bm{x} , \bm{y} \in \mathbb{R}^n$. Show the equalities:
+	\begin{equation}
+		\label{ex2203}
+		\bm{x} \bigodot \bm{y} = diag(\bm{x}) \bm{y} = diag(\bm{y}) \bm{x}
+		= diag(\bm{x} \bigodot \bm{y}) \bm{1}_n .
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let $\bm{x} , \bm{y} \in \mathbb{R}^n$.
+	By the definition of Hadamard product,
+	\begin{equation*} \bm{x} \bigodot \bm{y} = \begin{bmatrix}
+			x_1 y_1 \\
+			\vdots \\
+			x_n y_n
+		\end{bmatrix} .
+	\end{equation*}
+	Moreover,
+	\begin{equation*}
+		diag(\bm{x}) \bm{y} =
+		\begin{bmatrix}
+			x_1 &  & \bm{O} \\
+			 & \ddots &  \\
+			\bm{O} &  & x_n
+		\end{bmatrix}
+		\begin{bmatrix}
+			y_1 \\
+			\vdots \\
+			y_n
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			x_1 y_1 \\
+			\vdots \\
+			x_n y_n
+		\end{bmatrix} ,
+	\end{equation*}
+	\begin{equation*}
+		diag(\bm{x}) \bm{y} =
+		\begin{bmatrix}
+			y_1 &  & \bm{O} \\
+			 & \ddots &  \\
+			\bm{O} &  & y_n
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_1 \\
+			\vdots \\
+			x_n
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			y_1 x_1 \\
+			\vdots \\
+			y_n x_n
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			x_1 y_1 \\
+			\vdots \\
+			x_n y_n
+		\end{bmatrix} ,
+	\end{equation*}
+	and
+	\begin{equation*}
+		diag(\bm{x} \bigodot \bm{y}) \bm{1}_n =
+		diag(
+		\begin{bmatrix}
+			x_1 y_1 \\
+			\vdots \\
+			x_n y_n
+		\end{bmatrix}
+		) \bm{1}_n
+		=
+		\begin{bmatrix}
+			x_1 y_1 &  & \bm{O} \\
+			 & \ddots &  \\
+			\bm{O} &  & x_n y_n
+		\end{bmatrix}
+		\bm{1}_n
+		=
+		\begin{bmatrix}
+			x_1 y_1 \\
+			\vdots \\
+			x_n y_n
+		\end{bmatrix} .
+	\end{equation*}
+	From these equalities, we get (\ref{ex2203}).
+\end{proof}
+
+
+\section{Vec Operator}
+
+\subsection{Definition}
+
+\begin{dfn}
+	Let $\bm{A} = \lbrack \bm{a}_1 , \ldots , \bm{a}_n \rbrack \in \mathbb{R}^{m \times n}$.
+	The vec operator is defined as
+	\begin{equation}
+		\label{dfn_vec}
+		vec(\bm{A}) \coloneq
+		\begin{bmatrix}
+			\bm{a}_1 \\
+			\vdots \\
+			\bm{a}_n
+		\end{bmatrix} .
+	\end{equation}
+\end{dfn}
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.21.4.}
+	Let $\bm{X} \in \mathbb{R}^{m \times n}$.
+	Show that
+	\begin{equation}
+		\label{ex2214}
+		\lVert \bm{X} \rVert_{\mathrm{F}} = \lVert vec(\bm{X}) \rVert .
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let $\bm{X}= \lbrack \bm{x}_1 , \cdots , \bm{x}_n \rbrack  \in \mathbb{R}^{m \times n}$. By the definition of Frobenius norm,
+	\begin{equation*}
+		\lVert \bm{X} \rVert_{\mathrm{F}} = \sqrt{\langle \bm{X} , \bm{X} \rangle} = \sqrt{\sum_{i=1}^m \sum_{j=1}^n X_{i,j}^2}.
+	\end{equation*}
+	Furthermore,
+	\begin{equation*}
+		\begin{split}
+			\lVert vec(\bm{X}) \rVert &= \sqrt{\langle vec(\bm{X}) , vec(\bm{X}) \rangle} \\
+			&= \sqrt{vec(\bm{X})^{\mathrm{T}} vec(\bm{X})} \\
+			&= \sqrt{\lbrack \bm{x}_1^{\mathrm{T}} , \cdots , \bm{x}_n^{\mathrm{T}} \rbrack
+			\begin{bmatrix}
+				\bm{x}_1 \\
+				\vdots \\
+				\bm{x}_n
+			\end{bmatrix}
+			} \\
+			&= \sqrt{\sum_{j=1}^n \bm{x}_j^{\mathrm{T}} \bm{x}_j} .
+		\end{split}
+	\end{equation*}
+	Thus, we get
+	\begin{equation}
+		\label{ex2214_sub0}
+		\lVert vec(\bm{X}) \rVert = \sqrt{\sum_{j=1}^n \bm{x}_j^{\mathrm{T}} \bm{x}_j}
+	\end{equation}
+	Since $\bm{x}_j$ is $j$-th column in $\bm{X}$,
+	\begin{equation}
+		\label{ex2214_sub1}
+		\bm{x}_j^{\mathrm{T}} \bm{x}_j = \sum_{i=1}^m X_{i,j}^2 .
+	\end{equation}
+	Substitute (\ref{ex2214_sub1}) into (\ref{ex2214_sub0}), we get
+	\begin{equation*}
+		\begin{split}
+			\lVert vec(\bm{X}) \rVert &= \sqrt{\sum_{j=1}^n \left( \sum_{i=1}^m X_{i,j}^2 \right)} \\
+			&= \sqrt{\sum_{i=1}^m \sum_{j=1}^n X_{i,j}^2} .
+		\end{split}
+	\end{equation*}
+	Hence, (\ref{ex2214}) holds.
+\end{proof}
+
+
+\end{document}
+

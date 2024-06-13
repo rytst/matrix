@@ -1,0 +1,529 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{ascmac}
+\usepackage{bm}
+%\usepackage[margin=20truemm]{geometry}
+\theoremstyle{plain}
+\newtheorem{dfn}{Definition}[subsection]
+\title{Matrix Algebra Marathon}
+\author{J2200071 Ryuto Saito}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Statistics}
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.6.2.}
+	Given $\ell$ vectors
+	\begin{math}
+		\bm{x}_1 , \ldots , \bm{x}_{\ell} \in \mathbb{R}^n ,
+	\end{math}
+	the covariance matrix
+	\begin{math}
+		\bm{C} \in \mathbb{S}_+^n
+	\end{math}
+	is defined by
+	\begin{equation}
+		\bm{C} \coloneq \dfrac{1}{\ell} \sum_{i=1}^{\ell} (\bm{x}_i - \bm{m}) (\bm{x}_i - \bm{m})^\mathrm{T} .
+	\end{equation}
+	where
+	\begin{equation}
+		\bm{m} \coloneq \dfrac{1}{\ell} \sum_{i=1}^{\ell} \bm{x}_i .
+	\end{equation}
+	Show that the $n \times \ell$ matrix
+	\begin{math}
+		\bm{X} \coloneq \lbrack \bm{x}_1 , \ldots , \bm{x}_{\ell} \rbrack
+	\end{math}
+	satisfies
+	\begin{equation}
+		\label{ex262}
+		\bm{C} + \bm{m} \bm{m}^\mathrm{T} = \dfrac{1}{\ell} \bm{X} \bm{X}^\mathrm{T} .
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{x}_1 , \ldots , \bm{x}_{\ell} \in \mathbb{R}^n .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\bm{C} + \bm{m} \bm{m}^\mathrm{T} &= \dfrac{1}{\ell} \sum_{i=1}^{\ell} (\bm{x}_i - \bm{m}) (\bm{x}_i - \bm{m})^\mathrm{T} + \bm{m} \bm{m}^\mathrm{T} \\
+			&= \dfrac{1}{\ell} \sum_{i=1}^{\ell} (\bm{x}_i - \bm{m}) (\bm{x}_i^\mathrm{T} - \bm{m}^\mathrm{T}) + \bm{m} \bm{m}^\mathrm{T} \\
+			&= \dfrac{1}{\ell} \sum_{i=1}^{\ell} (\bm{x}_i \bm{x}_i^\mathrm{T} - \bm{x_i} \bm{m}^\mathrm{T} - \bm{m} \bm{x}_i^\mathrm{T} + \bm{m} \bm{m}^\mathrm{T}) + \bm{m} \bm{m}^\mathrm{T} \\
+			&= \dfrac{1}{\ell} \left( \sum_{i=1}^{\ell} \bm{x}_i \bm{x}_i^\mathrm{T} - \sum_{i=1}^\ell \bm{x}_i \bm{m}^\mathrm{T} - \sum_{i=1}^\ell \bm{m} \bm{x}_i^\mathrm{T} + \sum_{i=1}^\ell \bm{m} \bm{m}^\mathrm{T} \right) + \bm{m} \bm{m}^\mathrm{T} \\
+			&= \dfrac{1}{\ell} \sum_{i=1}^{\ell} \bm{x}_i \bm{x}_i^\mathrm{T} - \left( \dfrac{1}{\ell} \sum_{i=1}^\ell \bm{x}_i \right) \bm{m}^\mathrm{T} - \bm{m} \left( \dfrac{1}{\ell} \sum_{i=1}^\ell \bm{x}_i^\mathrm{T} \right)
+			+ \dfrac{1}{\ell} \sum_{i=1}^\ell \bm{m} \bm{m}^\mathrm{T} + \bm{m} \bm{m}^\mathrm{T} \\
+			&= \dfrac{1}{\ell} \sum_{i=1}^{\ell} \bm{x}_i \bm{x}_i^\mathrm{T} - \bm{m} \bm{m}^\mathrm{T} - \bm{m} \left( \dfrac{1}{\ell} \sum_{i=1}^\ell \bm{x}_i^\mathrm{T} \right)
+			+ \bm{m} \bm{m}^\mathrm{T} + \bm{m} \bm{m}^\mathrm{T} \\
+			&= \dfrac{1}{\ell} \sum_{i=1}^{\ell} \bm{x}_i \bm{x}_i^\mathrm{T} - \bm{m} \left( \dfrac{1}{\ell} \sum_{i=1}^\ell \bm{x}_i \right)^\mathrm{T} + \bm{m} \bm{m}^\mathrm{T} \\
+			&= \dfrac{1}{\ell} \sum_{i=1}^{\ell} \bm{x}_i \bm{x}_i^\mathrm{T} - \bm{m} \bm{m}^\mathrm{T} + \bm{m} \bm{m}^\mathrm{T} \\
+			&= \dfrac{1}{\ell} \sum_{i=1}^{\ell} \bm{x}_i \bm{x}_i^\mathrm{T}
+		\end{split}
+	\end{equation*}
+	\begin{equation*}
+		\begin{split}
+			\dfrac{1}{\ell} \bm{X} \bm{X}^\mathrm{T} &= \dfrac{1}{\ell} \lbrack \bm{x}_1 , \ldots , \bm{x}_{\ell} \rbrack
+			\begin{bmatrix}
+				\bm{x}_1^\mathrm{T} \\
+				\vdots \\
+				\bm{x}_{\ell}^\mathrm{T}
+			\end{bmatrix} \\
+			&= \dfrac{1}{\ell} \sum_{i=1}^{\ell} \bm{x}_i \bm{x}_i^\mathrm{T}
+		\end{split}
+	\end{equation*}
+	Thus, we get $(\ref{ex262})$.
+\end{proof}
+
+
+\section{Idempotent Matrices}
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.7.2.}
+	Let
+	\begin{math}
+		\bm{v} \in \bm{\Delta}_{\ell}
+	\end{math}
+	where $\bm{\Delta}_\ell$ denotes the $\ell$-dimensional probablistic simplex:
+	\begin{math}
+		\bm{\Delta}_\ell \coloneq \{\bm{x} \in \mathbb{R}_+^{\ell} \mid \bm{x}^\mathrm{T} \bm{1}_{\ell} = 1\} .
+	\end{math}
+	Show that the $\ell \times \ell$ matrix
+	\begin{equation*}
+		\bm{K} \coloneq \bm{I} - \bm{1}_{\ell} \bm{v}^\mathrm{T}
+	\end{equation*}
+	satisfies $\bm{K}^2 = \bm{K} .$
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{v} \in \bm{\Delta}_{\ell} .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\bm{K}^2 &= (\bm{I} - \bm{1}_{\ell} \bm{v}^\mathrm{T})^2 \\
+			&= \bm{I} - \bm{1}_{\ell} \bm{v}^\mathrm{T} - \bm{1}_{\ell} \bm{v}^\mathrm{T} + \bm{1}_{\ell} \bm{v}^\mathrm{T} \bm{1}_{\ell} \bm{v}^\mathrm{T} \\
+			&= \bm{I} - 2 \bm{1}_{\ell} \bm{v}^\mathrm{T} + \bm{1}_{\ell} (\bm{v}^\mathrm{T} \bm{1}_{\ell}) \bm{v}^\mathrm{T} \\
+			&= \bm{I} - 2 \bm{1}_{\ell} \bm{v}^\mathrm{T} + \bm{1}_{\ell} \bm{v}^\mathrm{T} \\
+			&= \bm{I} - \bm{1}_{\ell} \bm{v}^\mathrm{T} \\
+			&= \bm{K}
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+
+\section{Trace}
+
+\subsection{Definition}
+
+\begin{dfn}
+	Let $\bm{A}$ be an $n \times n$ square matrix. The trace of $\bm{A}$ is defined as
+	\begin{equation}
+		\label{trace}
+		tr(\bm{A}) = \sum_{i=1}^n A_{i,i} .
+	\end{equation}
+\end{dfn}
+
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.8.3.}
+	For
+	\begin{math}
+		\forall a , \forall b \in \mathbb{R}
+	\end{math}
+	and
+	\begin{math}
+		\forall \bm{X} , \forall \bm{Y} \in \mathbb{R}^{n \times n} ,
+	\end{math}
+	show that
+	\begin{equation}
+		tr(a \bm{X} + b \bm{Y}) = a tr(\bm{X}) + b tr(\bm{Y}) .
+	\end{equation}
+	
+\end{itembox}
+
+\begin{proof}
+	For all $a, b \in \mathbb{R}$ and $\bm{X} , \bm{Y} \in \mathbb{R}^{n \times n} ,$
+	\begin{equation*}
+		\begin{split}
+			tr(a \bm{X} + b \bm{Y}) &= \sum_{i=1}^n (a \bm{X}_{i,i} + b \bm{Y}_{i,i}) \\
+			&= a \sum_{i=1}^n \bm{X}_{i,i} + b \sum_{i=1}^n \bm{Y}_{i,i} \\
+			&= a tr(\bm{X}) + b tr(\bm{Y}) .
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.8.5.}
+	Show that $tr(\bm{AB}) = tr(\bm{BA})$ for $\bm{A} \in \mathbb{R}^{m \times n} , \bm{B} \in \mathbb{R}^{n \times m} .$
+	Then, show that $tr(\bm{ABC}) = tr(\bm{CAB}) = tr(\bm{BCA})$ for $\bm{A} \in \mathbb{R}^{m \times n} , \bm{B} \in \mathbb{R}^{n \times p} , \bm{C} \in \mathbb{R}^{p \times m} .$
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{m \times n} , \bm{B} \in \mathbb{R}^{n \times m} .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			tr(\bm{AB}) &= \sum_{i=1}^m (\bm{AB})_{i,i} \\
+			&= \sum_{i=1}^m \sum_{j=1}^n A_{i,j} B_{j,i} \\
+			&= \sum_{j=1}^n \sum_{i=1}^m B_{j,i} A_{i,j} \\
+			&= \sum_{j=1}^n (\bm{BA})_{j,j} \\
+			&= tr(\bm{BA})
+		\end{split}
+	\end{equation*}
+	Thus, we get
+	\begin{equation}
+		\label{trABBA}
+		tr(\bm{AB}) = tr(\bm{BA}) .
+	\end{equation}
+	Let $\bm{A} \in \mathbb{R}^{m \times n} , \bm{B} \in \mathbb{R}^{n \times p} , \bm{C} \in \mathbb{R}^{p \times m}$.
+	Since $(\ref{trABBA})$,
+	\begin{equation*}
+		\begin{split}
+			tr(\bm{ABC}) &= tr((\bm{AB}) \bm{C}) \\
+			&= tr(\bm{C}(\bm{AB})) \\
+			&= tr(\bm{CAB}) .
+		\end{split}
+	\end{equation*}
+	Moreover
+	\begin{equation*}
+		\begin{split}
+			tr(\bm{ABC}) &= tr(\bm{A}(\bm{BC})) \\
+			&= tr((\bm{BC}) \bm{A}) \\
+			&= tr(\bm{BCA}) .
+		\end{split}
+	\end{equation*}
+	Therefore, it follows that
+	\begin{equation*}
+		tr(\bm{ABC}) = tr(\bm{CAB}) = tr(\bm{BCA}) .
+	\end{equation*}
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.8.8.}
+	For
+	\begin{math}
+		\forall \bm{x} , \forall \bm{y} \in \mathbb{R}^n ,
+	\end{math}
+	show that
+	\begin{equation}
+		\langle \bm{x} , \bm{y} \rangle = tr(\bm{x} \bm{y}^\mathrm{T})
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Since $(\ref{trABBA})$,
+	\begin{equation*}
+		\begin{split}
+			tr(\bm{x} \bm{y}^\mathrm{T}) &= tr(\bm{y}^\mathrm{T} \bm{x}) \\
+			&= tr(\langle \bm{y} , \bm{x} \rangle) \\
+			&= \langle \bm{y} , \bm{x} \rangle \\
+			&= \langle \bm{x} , \bm{y} \rangle .
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+
+\section{Inner-Product of Matrices}
+
+\subsection{Definition}
+
+\begin{dfn}
+	The inner-product of matrices is defined as
+	\begin{equation}
+		\label{inner-product_of_matrices}
+		\langle \bm{X} , \bm{Y} \rangle \coloneq \sum_{i=1}^m \sum_{j=1}^n X_{i,j} Y_{i,j}
+	\end{equation}
+	where
+	\begin{math}
+		\bm{X} , \bm{Y} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	
+\end{dfn}
+
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.10.2.}
+	For
+	\begin{math}
+		\forall \bm{X} , \forall \bm{Y} \in \mathbb{R}^{m \times n} ,
+	\end{math}
+	derive the equalities:
+	\begin{equation}
+		\label{ex2102}
+		\langle \bm{X} , \bm{Y} \rangle = \langle \bm{Y} , \bm{X} \rangle
+		= tr(\bm{X}^\mathrm{T} \bm{Y}) = tr(\bm{Y}^\mathrm{T} \bm{X})
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{X} , \bm{Y} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	\begin{equation*}
+		\langle \bm{X} , \bm{Y} \rangle = \sum_{i=1}^m \sum_{j=1}^n X_{i,j} Y_{i,j}
+		= \sum_{i=1}^m \sum_{j=1}^n Y_{i,j} X_{i,j} = \langle \bm{Y} , \bm{X} \rangle
+	\end{equation*}
+	\begin{equation*}
+		\begin{split}
+			tr(\bm{X}^\mathrm{T} \bm{Y}) &= \sum_{j=1}^n (\bm{X}^\mathrm{T} \bm{Y})_{j,j} \\
+			&= \sum_{j=1}^n \sum_{i=1}^m (\bm{X}^\mathrm{T})_{j,i} Y_{i,j} \\
+			&= \sum_{j=1}^n \sum_{i=1}^m X_{i,j} Y_{i,j} \\
+			&= \sum_{i=1}^m \sum_{j=1}^n X_{i,j} Y_{i,j} \\
+			&= \langle \bm{X} , \bm{Y} \rangle
+		\end{split}
+	\end{equation*}
+	\begin{equation*}
+		\begin{split}
+			tr(\bm{Y}^\mathrm{T} \bm{X}) &= \sum_{j=1}^n (\bm{Y}^\mathrm{T} \bm{X})_{j,j} \\
+			&= \sum_{j=1}^n \sum_{i=1}^m (\bm{Y}^\mathrm{T})_{j,i} X_{i,j} \\
+			&= \sum_{j=1}^n \sum_{i=1}^m Y_{i,j} X_{i,j} \\
+			&= \sum_{i=1}^m \sum_{j=1}^n Y_{i,j} X_{i,j} \\
+			&= \langle \bm{Y} , \bm{X} \rangle
+		\end{split}
+	\end{equation*}
+	Therefore,
+	\begin{equation*}
+		\langle \bm{X} , \bm{Y} \rangle = \langle \bm{Y} , \bm{X} \rangle
+		= tr(\bm{X}^\mathrm{T} \bm{Y}) = tr(\bm{Y}^\mathrm{T} \bm{X}) .
+	\end{equation*}
+\end{proof}
+
+
+\begin{itembox}[l]{Exercise 2.10.5.}
+	For
+	\begin{math}
+		\forall a , \forall b \in \mathbb{R} ,
+		\forall \bm{X} , \forall \bm{Y} \in \mathbb{R}^{m \times n} ,
+	\end{math}
+	show that
+	\begin{equation}
+		\label{ex2105}
+		\langle a \bm{X} , b \bm{Y} \rangle = a b \langle \bm{X} , \bm{Y} \rangle .
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		a , b \in \mathbb{R}
+	\end{math}
+	and
+	\begin{math}
+		\bm{X} , \bm{Y} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\langle a \bm{X} , b \bm{Y} \rangle &= \sum_{i=1}^m \sum_{j=1}^n a X_{i,j} b Y_{i,j} \\
+			&= a b \sum_{i=1}^m \sum_{j=1}^n X_{i,j} Y_{i,j} \\
+			&= a b \langle \bm{X} , \bm{Y} \rangle
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.10.7.}
+	For
+	\begin{math}
+		\forall \bm{X} \in \mathbb{R}^{m \times n} ,
+	\end{math}
+	show that
+	\begin{equation}
+		\label{ex2107}
+		\langle \bm{X} , \bm{E}_{i,j} \rangle
+		= tr(\bm{X}^\mathrm{T} , \bm{E}_{i,j})
+		= X_{i,j}
+	\end{equation}
+	where $\bm{E}_{i,j}$ denotes an $m \times n$ matrix in which $(i,j)$th entry is one
+	and all the others are zero.
+\end{itembox}
+
+\begin{proof}
+	Let $\bm{X} \in \mathbb{R}^{m \times n}$. Recall $(\ref{ex2102})$. It leads
+	\begin{equation*}
+		\langle \bm{X} , \bm{E}_{i,j} \rangle = tr(\bm{X}^\mathrm{T} , \bm{E}_{i,j}) .
+	\end{equation*}
+	Furthermore, since
+	\begin{math}
+		(\bm{E}_{i,j})_{k,l} =
+		\begin{cases}
+			1 & (k=i, l=j) \\
+			0 & (k \neq i\ or\ l \neq j) ,
+		\end{cases}
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\langle \bm{X} , \bm{E}_{i,j} \rangle &= \sum_{k=1}^m \sum_{l=1}^n X_{k,l} (\bm{E}_{i,j})_{k,l} \\
+			&= X_{i,j} .
+		\end{split}
+	\end{equation*}
+	Therefore, we get $(\ref{ex2107})$.
+\end{proof}
+
+
+\section{Frobenius Norm}
+
+\subsection{Definition}
+
+\begin{dfn}
+	The Frobenius norm of a matrix $\bm{X} \in \mathbb{R}^{m \times n}$ is defined as
+	\begin{equation*}
+		\Vert \bm{X} \rVert_{\mathrm{F}} \coloneq \sqrt{\langle \bm{X} , \bm{X} \rangle} .
+	\end{equation*}
+\end{dfn}
+
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.11.3.}
+	For
+	\begin{math}
+		\forall \bm{X} \in \mathbb{R}^{m \times n} ,
+	\end{math}
+	show that
+	\begin{equation*}
+		\lVert \bm{X} \rVert_\mathrm{F} \geq 0 .
+	\end{equation*}
+\end{itembox}
+
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{X} \in \mathbb{R}^{m \times n} ,
+	\end{math}
+	and
+	\begin{math}
+		k \in \mathbb{N}_m , l \in \mathbb{N}_n .
+	\end{math}
+	
+	\begin{equation*}
+		\lVert \bm{X} \rVert_\mathrm{F} = \sqrt{\sum_{i=1}^m \sum_{j=1}^n X_{i,j}^2}
+		\geq \sqrt{X_{k,l}^2}
+		= \lvert X_{k,l} \rvert \geq 0
+	\end{equation*}
+	Thus, it follows that
+	\begin{equation*}
+		\lVert \bm{X} \rVert_\mathrm{F} \geq 0 .
+	\end{equation*}
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.11.5.}
+	Let
+	\begin{math}
+		\bm{X} , \bm{Y} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	Derive the equality:
+	\begin{equation}
+		\label{ex2115}
+		\lVert \bm{X} + \bm{Y} \rVert_\mathrm{F}^2 = \lVert \bm{X} \rVert_\mathrm{F}^2
+		+ \lVert \bm{Y} \rVert_\mathrm{F}^2 + 2 \langle \bm{X} , \bm{Y} \rangle .
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{X} , \bm{Y} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	\begin{equation}
+		\begin{split}
+			\lVert \bm{X} + \bm{Y} \rVert_\mathrm{F}^2 &= \langle \bm{X} + \bm{Y} , \bm{X} + \bm{Y} \rangle \\
+			&= \sum_{i=1}^m \sum_{j=1}^n (X_{i,j} + Y_{i,j})^2 \\
+			&= \sum_{i=1}^m \sum_{j=1}^n (X_{i,j}^2 + Y_{i,j}^2 + 2 X_{i,j} Y_{i,j}) \\
+			&= \sum_{i=1}^m \sum_{j=1}^n X_{i,j}^2 
+			+ \sum_{i=1}^m \sum_{j=1}^n Y_{i,j}^2 + 2 \sum_{i=1}^m \sum_{j=1}^n X_{i,j} Y_{i,j} \\
+			&= \langle \bm{X} , \bm{X} \rangle + \langle \bm{Y} , \bm{Y} \rangle 
+			+ 2 \langle \bm{X} , \bm{Y} \rangle \\
+			&= \sqrt{\langle \bm{X} , \bm{X} \rangle}^2 + \sqrt{\langle \bm{Y} , \bm{Y} \rangle}^2
+			+ 2 \langle \bm{X} , \bm{Y} \rangle \\
+			&= \lVert \bm{X} \rVert_\mathrm{F}^2
+			+ \lVert \bm{Y} \rVert_\mathrm{F}^2 + 2 \langle \bm{X} , \bm{Y} \rangle
+		\end{split}
+	\end{equation}
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.11.7.}
+	For
+	\begin{math}
+		\forall \bm{X} , \forall \bm{Y} \in \mathbb{R}^{m \times n} ,
+	\end{math}
+	show that
+	\begin{equation}
+		\label{ex2117}
+		\lVert \bm{X} + \bm{Y} \rVert_{\mathrm{F}} \leq \lVert \bm{X} \rVert_{\mathrm{F}} + \lVert \bm{Y} \rVert_{\mathrm{F}} .
+	\end{equation}
+\end{itembox}
+
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{X} , \bm{Y} \in \mathbb{R}^{m \times n} , t \in \mathbb{R} .
+	\end{math}
+	Consider the function
+	\begin{equation*}
+		\begin{split}
+			f(t) &= \lVert \bm{X} + t \bm{Y} \rVert_{\mathrm{F}} \\
+			&= \langle \bm{X} + t \bm{Y} , \bm{X} + t \bm{Y} \rangle \\
+			&= \sum_{i=1}^m \sum_{j=1}^n (X_{i,j} + t Y_{i,j})^2 \\
+			&= \sum_{i=1}^m \sum_{j=1}^n (X_{i,j}^2 + t^2 Y_{i,j}^2 + 2 t X_{i,j} Y_{i,j}) \\
+			&= \sum_{i=1}^m \sum_{j=1}^n X_{i,j}^2 + t^2 \sum_{i=1}^m \sum_{j=1}^n Y_{i,j}^2
+			+ 2 t X_{i,j} Y_{i,j} \\
+			&= \langle \bm{X} , \bm{X} \rangle + t^2 \langle \bm{Y} , \bm{Y} \rangle 
+			+ 2 t \langle \bm{X} , \bm{Y} \rangle \\
+			&= \lVert \bm{Y} \rVert_{\mathrm{F}}^2 t^2 + 2 \langle \bm{X} , \bm{Y} \rangle t
+			+ \lVert \bm{X} \rVert_{\mathrm{F}}^2 \geq 0 .
+		\end{split}
+	\end{equation*}
+	Then, the quadratic equation
+	\begin{equation*}
+		\lVert \bm{Y} \rVert_{\mathrm{F}}^2 t^2 + 2 \langle \bm{X} , \bm{Y} \rangle t + \lVert \bm{X} \rVert_{\mathrm{F}}^2 = 0
+	\end{equation*}
+	has at most one solution. This implies that its discriminant must be less or zero, that is
+	\begin{equation*}
+		(2 \langle \bm{X} , \bm{Y} \rangle)^2 - 4 \lVert \bm{Y} \rVert_{\mathrm{F}}^2 \lVert \bm{X} \rVert_{\mathrm{F}}^2
+		\leq 0 .
+	\end{equation*}
+	Hence
+	\begin{equation*}
+		\begin{split}
+			4 \langle \bm{X} , \bm{Y} \rangle^2 &\leq 4 \lVert \bm{X} \rVert_{\mathrm{F}}^2 \lVert \bm{Y} \rVert_{\mathrm{F}}^2 \\
+			\langle \bm{X} , \bm{Y} \rangle^2 &\leq \lVert \bm{X} \rVert_{\mathrm{F}}^2 \lVert \bm{Y} \rVert_{\mathrm{F}}^2 .
+		\end{split}
+	\end{equation*}
+	It follows that
+	\begin{equation*}
+		- \lVert \bm{X} \rVert_{\mathrm{F}} \lVert \bm{Y} \rVert_{\mathrm{F}} \leq \langle \bm{X} , \bm{Y} \rangle
+		\leq \lVert \bm{X} \rVert_{\mathrm{F}} \lVert \bm{Y} \rVert_{\mathrm{F}} .
+	\end{equation*}
+	This also implies
+	\begin{equation*}
+		\langle \bm{X} , \bm{Y} \rangle \leq \lVert \bm{X} \rVert_{\mathrm{F}} \lVert \bm{Y} \rVert_{\mathrm{F}} .
+	\end{equation*}
+	Therefore, recall $(\ref{ex2115})$,
+	\begin{equation*}
+		\begin{split}
+			\lVert \bm{X} + \bm{Y} \rVert_\mathrm{F} &= \sqrt{\lVert \bm{X} \rVert_\mathrm{F}^2
+			+ \lVert \bm{Y} \rVert_\mathrm{F}^2 + 2 \langle \bm{X} , \bm{Y} \rangle} \\
+			&\leq \sqrt{\lVert \bm{X} \rVert_\mathrm{F}^2
+			+ \lVert \bm{Y} \rVert_\mathrm{F}^2 + 2 \lVert \bm{X} \rVert_{\mathrm{F}} \lVert \bm{Y} \rVert_{\mathrm{F}}} \\
+			&= \sqrt{(\lVert \bm{X} \rVert_\mathrm{F} + \lVert \bm{Y} \rVert_\mathrm{F})^2} \\
+			&= \lVert \bm{X} \rVert_\mathrm{F} + \lVert \bm{Y} \rVert_\mathrm{F} .
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+\end{document}

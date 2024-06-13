@@ -1,0 +1,569 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{ascmac}
+\usepackage{bm}
+\usepackage[margin=13truemm]{geometry}
+\theoremstyle{plain}
+\newtheorem{dfn}{Definition}[subsection]
+\title{Matrix Algebra Marathon}
+\author{J2200071 Ryuto Saito}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Basic Matrix Identities}
+
+\subsection{Definition}
+
+\begin{dfn}
+	The transpose of an $m \times n$ matrix $\bm{A}$, to be denoted by $A^\mathrm{T}$,
+	is the $n \times m$ matrix whose $(j , i)$-th entry is $(i , j)$-th  entry of $\bm{A}$. Namely,
+	\begin{equation}
+		\left(
+		\begin{bmatrix}
+			A_{1,1} & \cdots & A_{1,n} \\
+			\vdots & \ddots & \vdots \\
+			A_{m,1} & \cdots & A_{m,n}
+		\end{bmatrix}
+		\right)^\mathrm{T}
+		=
+		\begin{bmatrix}
+			A_{1,1} & \cdots & A_{m,1} \\
+			\vdots & \ddots & \vdots \\
+			A_{1,n} & \cdots & A_{m,n}
+		\end{bmatrix}
+	\end{equation}
+\end{dfn}
+
+\begin{dfn}
+	The inverse of a square $n \times n$ matrix $\bm{A}$, to be denoted by $\bm{A}^{-1}$, is the $n \times n$ matrix such that
+	\begin{equation}
+		\bm{A}^{-1} \bm{A} = \bm{I}_n .
+	\end{equation}
+	The matrix $\bm{A}$ is said to be non-singlar if $\bm{A}^{-1}$ exists.
+\end{dfn}
+
+
+\subsection{Exercise}
+
+\begin{itembox}[l]{Exercise 2.5.2.}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{m \times p} , \bm{B} , \bm{C} \in \mathbb{R}^{p \times n} .
+	\end{math}
+	Show that
+	\begin{math}
+		\bm{A} (\bm{B} + \bm{C}) = \bm{AB} + \bm{AC} .
+	\end{math}
+
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{m \times p} , \bm{B} , \bm{C} \in \mathbb{R}^{p \times n} .
+	\end{math}
+	For all
+	\begin{math}
+		i \in \mathbb{N}_m ,
+	\end{math}
+	and
+	\begin{math}
+		j \in \mathbb{N}_n ,
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\left( \bm{A} (\bm{B} + \bm{C}) \right)_{i,j} &= \sum_{k=1}^p \bm{A}_{i,k} (\bm{B} + \bm{C})_{k,j} \\
+			&= \sum_{k=1}^p \bm{A} (\bm{B}_{k,j} + \bm{C}_{k,j}) \\
+			&= \sum_{k=1}^p (\bm{A}_{i,k} \bm{B}_{k,j} + \bm{A}_{i,k} \bm{C}_{k,j}) \\
+			&= \sum_{k=1}^p \bm{A}_{i,k} \bm{B}_{k,j} + \sum_{k=1}^p \bm{A}_{i,k} \bm{C}_{k,j} \\
+			&= \bm{AB}_{i,j} + \bm{AC}_{i,j} \\
+			&= (\bm{AB} + \bm{AC})_{i,j} .
+		\end{split}
+	\end{equation*}
+	From this $\bm{A} (\bm{B} + \bm{C}) = \bm{AB} + \bm{AC}$ follows.
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.5.5.}
+	Let
+	\begin{math}
+		\bm{A} , \bm{B} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	Show that
+	\begin{math}
+		(\bm{A} + \bm{B})^\mathrm{T} = \bm{A}^\mathrm{T} + \bm{B}^\mathrm{T} .
+	\end{math}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} , \bm{B} \in \mathbb{R}^{m \times n}.
+	\end{math}
+	For all
+	\begin{math}
+		i \in \mathbb{N}_m ,
+	\end{math}
+	and
+	\begin{math}
+		j \in \mathbb{N}_n ,
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\left((\bm{A} + \bm{B})^\mathrm{T} \right)_{i,j} &= (\bm{A} + \bm{B})_{j,i} \\
+			&= \bm{A}_{j,i} + \bm{B}_{j,i} \\
+			&= \bm{A}_{i,j}^ \mathrm{T} + \bm{B}_{i,j}^\mathrm{T} \\
+			&= (\bm{A}^ \mathrm{T} + \bm{B}^ \mathrm{T})_{i,j} .
+		\end{split}
+	\end{equation*}
+	From this $(\bm{A} + \bm{B})^\mathrm{T} = \bm{A}^\mathrm{T} + \bm{B}^\mathrm{T}$ follows.
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.5.7.}
+	Let
+	\begin{math}
+		\bm{A} , \bm{B} \in \mathbb{R}^{m \times p} , \bm{C} \in \mathbb{R}^{p \times n} .
+	\end{math}
+	Show that
+	\begin{math}
+		(\bm{A} + \bm{B}) \bm{C} = \bm{AC} + \bm{BC} .
+	\end{math}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} , \bm{B} \in \mathbb{R}^{m \times p} , \bm{C} \in \mathbb{R}^{p \times n} .
+	\end{math}
+	For all
+	\begin{math}
+		i \in \mathbb{N}_m ,
+	\end{math}
+	and
+	\begin{math}
+		j \in \mathbb{N}_n ,
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			((\bm{A} + \bm{B}) \bm{C})_{i,j} &= \sum_{k=1}^p (\bm{A} + \bm{B})_{i,k} \bm{C}_{k,j} \\
+			&= \sum_{k=1}^p (\bm{A}_{i,k} + \bm{B}_{i,k}) \bm{C}_{k,j} \\
+			&= \sum_{k=1}^p (\bm{A}_{i,k} \bm{C}_{k,j} + \bm{B}_{i,k} \bm{C}_{k,j}) \\
+			&= \sum_{k=1}^p (\bm{A}_{i,k} \bm{C}_{k,j}) + \sum_{k=1}^p (\bm{B}_{i,k} \bm{C}_{k,j}) \\
+			&= (\bm{A} \bm{C})_{i,j} + (\bm{B} \bm{C})_{i,j} \\
+			&= (\bm{A} \bm{C} + \bm{B} \bm{C})_{i,j} .
+		\end{split}
+	\end{equation*}
+	From this $(\bm{A} + \bm{B}) \bm{C} = \bm{AC} + \bm{BC}$ follows.
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.5.9.}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{m \times n} , \bm{B} \in \mathbb{R}^{n \times p} ,
+	\end{math}
+	and
+	\begin{math}
+		\bm{C} \in \mathbb{R}^{n \times q} .
+	\end{math}
+	Show that
+	\begin{equation}
+		\bm{A} \lbrack \bm{B} , \bm{C} \rbrack = \lbrack \bm{AB} , \bm{AC} \rbrack .
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{m \times n} , \bm{B} \in \mathbb{R}^{n \times p} ,
+	\end{math}
+	and
+	\begin{math}
+		\bm{C} \in \mathbb{R}^{n \times q} .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\bm{A} \lbrack \bm{B} , \bm{C} \rbrack &=
+			\begin{bmatrix}
+				A_{1,1} & \cdots & A_{1,n} \\
+				\vdots & \ddots & \vdots \\
+				A_{m,1} & \cdots & A_{m,n}
+			\end{bmatrix}
+			\begin{bmatrix}
+				B_{1,1} & \cdots & B_{1,p} & C_{1,1} & \cdots & C_{1,q} \\
+				\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+				B_{n,1} & \cdots & B_{n,p} & C_{n,1} & \cdots & C_{n,q}
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				\sum_{i=1}^n A_{1,i} B_{i,1} & \cdots & \sum_{i=1}^n A_{1,i} B_{i,p} & \sum_{i=1}^n A_{1,i} C_{i,1} & \cdots & \sum_{i=1}^n A_{1,i} C_{i,q} \\
+				\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+				\sum_{i=1}^n A_{m,i} B_{i,1} & \cdots & \sum_{i=1}^n A_{m,i} B_{i,p} & \sum_{i=1}^n A_{m,i} C_{i,1} & \cdots & \sum_{i=1}^n A_{m,i} C_{i,q}
+			\end{bmatrix} \\
+			&= \lbrack \bm{AB} , \bm{AC} \rbrack
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.5.11.}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{m \times p} , \bm{B} \in \mathbb{R}^{m \times q} , \bm{C} \in \mathbb{R}^{p \times n} ,
+	\end{math}
+	and
+	\begin{math}
+		\bm{D} \in \mathbb{R}^{q \times n} .
+	\end{math}
+	Show that
+	\begin{equation}
+		\lbrack \bm{A} , \bm{B} \rbrack 
+		\begin{bmatrix}
+			\bm{C} \\
+			\bm{D}
+		\end{bmatrix}
+		= \bm{AC} + \bm{BD} .
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{m \times p} , \bm{B} \in \mathbb{R}^{m \times q} , \bm{C} \in \mathbb{R}^{p \times n} ,
+	\end{math}
+	and
+	\begin{math}
+		\bm{D} \in \mathbb{R}^{q \times n} .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\lbrack \bm{A} , \bm{B} \rbrack
+			\begin{bmatrix}
+				\bm{C} \\
+				\bm{D}
+			\end{bmatrix}
+			&=
+			\begin{bmatrix}
+				A_{1,1} & \cdots & A_{1,p} & B_{1,1} & \cdots & B_{1,q} \\
+				\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+				A_{m,1} & \cdots & A_{m,p} & B_{m,1} & \cdots & B_{m,q}
+			\end{bmatrix}
+			\begin{bmatrix}
+				C_{1,1} & \cdots & C_{1,n} \\
+				\vdots & \ddots & \vdots \\
+				C_{p.1} & \cdots & C_{p,n} \\
+				D_{1.1} & \cdots & D_{1,n} \\
+				\vdots & \ddots & \vdots \\
+				D_{q,1} & \cdots & D_{q,n}
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				\sum_{i=1}^p A_{1,i} C_{i,1} + \sum_{i=1}^q B_{1,i} D_{i,1} & \cdots & \sum_{i=1}^p A_{1,i} C_{i,n} + \sum_{i=1}^q B_{1,i} D_{i,n} \\
+				\vdots & \ddots & \vdots \\
+				\sum_{i=1}^p A_{m,i} C_{i,1} + \sum_{i=1}^q B_{m,i} D_{i,1} & \cdots & \sum_{i=1}^p A_{m,i} C_{i,n} + \sum_{i=1}^q B_{m,i} D_{i,n}
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				\sum_{i=1}^p A_{1,i} C_{i,1} & \cdots & \sum_{i=1}^p A_{1,i} C_{i,n} \\
+				\vdots & \ddots & \vdots \\
+				\sum_{i=1}^p A_{m,i} C_{i,1} & \cdots & \sum_{i=1}^p A_{m,i} C_{i,n}
+			\end{bmatrix}
+			+
+			\begin{bmatrix}
+				\sum_{i=1}^q B_{1,i} D_{i,1} & \cdots & \sum_{i=1}^q B_{1,i} D_{i,n} \\
+				\vdots & \ddots & \vdots \\
+				\sum_{i=1}^q B_{m,i} D_{i,1} & \cdots & \sum_{i=1}^q B_{m,i} D_{i,n}
+			\end{bmatrix} \\
+			&=
+			\bm{AC} + \bm{BD}
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.5.13.}
+	Let
+	\begin{math}
+		\bm{A}^{(1)} \in \mathbb{R}^{m \times n_1} , \bm{A}^{(2)} \in \mathbb{R}^{m \times n_2} ,
+		\bm{B}^{(1,1)} \in \mathbb{R}^{n_1 \times p_1} , \bm{B}^{(1,2)} \in \mathbb{R}^{n_1 \times p_2} ,
+        \bm{B}^{(2,1)} \in \mathbb{R}^{n_2 \times p_1} ,
+	\end{math}
+	and
+	\begin{math}
+		\bm{B}^{(2,2)} \in \mathbb{R}^{n_2 \times p_2} .
+	\end{math}
+	Show that
+	\begin{equation}
+		\begin{split}
+			&\lbrack \bm{A}^{(1)} , \bm{A}^{(2)} \rbrack
+		    \begin{bmatrix}
+			    \bm{B}^{(1,1)} & \bm{B}^{(1,2)} \\
+			    \bm{B}^{(2,1)} & \bm{B}^{(2,2)}
+		    \end{bmatrix} \\
+			&=
+		    \lbrack \bm{A}^{(1)} \bm{B}^{(1,1)} + \bm{A}^{(2)} \bm{B}^{(2,1)} , \bm{A}^{(1)} \bm{B}^{(1,2)} + \bm{A}^{(2)} \bm{B}^{(2,2)} \rbrack .
+		\end{split}
+	\end{equation}
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A}^{(1)} \in \mathbb{R}^{m \times n_1} , \bm{A}^{(2)} \in \mathbb{R}^{m \times n_2} ,
+		\bm{B}^{(1,1)} \in \mathbb{R}^{n_1 \times p_1} , \bm{B}^{(1,2)} \in \mathbb{R}^{n_1 \times p_2} ,
+        \bm{B}^{(2,1)} \in \mathbb{R}^{n_2 \times p_1} ,
+	\end{math}
+	and
+	\begin{math}
+		\bm{B}^{(2,2)} \in \mathbb{R}^{n_2 \times p_2} .
+	\end{math}
+	\footnotesize
+	\begin{equation*}
+		\begin{split}
+			&\lbrack \bm{A}^{(1)} , \bm{A}^{(2)} \rbrack
+		    \begin{bmatrix}
+			    \bm{B}^{(1,1)} & \bm{B}^{(1,2)} \\
+			    \bm{B}^{(2,1)} & \bm{B}^{(2,2)}
+		    \end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				A_{1,1}^{(1)} & \cdots & A_{1,n_1}^{(1)} & A_{1,1}^{(2)} & \cdots & A_{1,n_2}^{(2)} \\
+				\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+				A_{m,1}^{(1)} & \cdots & A_{m,n_1}^{(1)} & A_{m,1}^{(2)} & \cdots & A_{m,n_2}^{(2)}
+			\end{bmatrix}
+			\begin{bmatrix}
+				B_{1,1}^{(1,1)} & \cdots & B_{1,p_1}^{(1,1)} & B_{1,1}^{(1,2)} & \cdots & B_{1,p_2}^{(1,2)} \\
+				\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+				B_{n_1,1}^{(1,1)} & \cdots & B_{n_1,p_1}^{(1,1)} & B_{n_1,1}^{(1,2)} & \cdots & B_{n_1,p_2}^{(1,2)} \\
+				B_{1,1}^{(2,1)} & \cdots & B_{1,p_1}^{(2,1)} & B_{1,1}^{(2,2)} & \cdots & B_{1,p_2}^{(2,2)} \\
+				\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+				B_{n_2,1}^{(2,1)} & \cdots & B_{n_2,p_1}^{(2,1)} & B_{n_2,1}^{(2,2)} & \cdots & B_{n_2,p_2}^{(2,2)}
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				\sum\limits_{i=1}^{n_1} A_{1,i}^{(1)} B_{i,1}^{(1,1)} + \sum\limits_{i=1}^{n_2} A_{1,i}^{(2)} B_{i,1}^{(2,1)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_1} A_{1,i}^{(1)} B_{i,p_1}^{(1,1)} + \sum\limits_{i=1}^{n_2} A_{1,i}^{(2)} B_{i,p_1}^{(2,1)} &
+				\sum\limits_{i=1}^{n_1} A_{1,i}^{(1)} B_{i,1}^{(1,2)} + \sum\limits_{i=1}^{n_2} A_{1,i}^{(2)} B_{i,1}^{(2,2)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_1} A_{1,i}^{(1)} B_{i,p_2}^{(1,2)} + \sum\limits_{i=1}^{n_2} A_{1,i}^{(2)} B_{i,p_2}^{(2,2)} \\
+				\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+				\sum\limits_{i=1}^{n_1} A_{m,i}^{(1)} B_{i,1}^{(1,1)} + \sum\limits_{i=1}^{n_2} A_{m,i}^{(2)} B_{i,1}^{(2,1)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_1} A_{m,i}^{(1)} B_{i,p_1}^{(1,1)} + \sum\limits_{i=1}^{n_2} A_{m,i}^{(2)} B_{i,p_1}^{(2,1)} &
+				\sum\limits_{i=1}^{n_1} A_{m,i}^{(1)} B_{i,1}^{(1,2)} + \sum\limits_{i=1}^{n_2} A_{m,i}^{(2)} B_{i,1}^{(2,2)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_1} A_{m,i}^{(1)} B_{i,p_2}^{(1,2)} + \sum\limits_{i=1}^{n_2} A_{m,i}^{(2)} B_{i,p_2}^{(2,2)} \\
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				\sum\limits_{i=1}^{n_1} A_{1,i}^{(1)} B_{i,1}^{(1,1)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_1} A_{1,i}^{(1)} B_{i,p_1}^{(1,1)} &
+				\sum\limits_{i=1}^{n_1} A_{1,i}^{(1)} B_{i,1}^{(1,2)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_1} A_{1,i}^{(1)} B_{i,p_2}^{(1,2)} \\
+				\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+				\sum\limits_{i=1}^{n_1} A_{m,i}^{(1)} B_{i,1}^{(1,1)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_1} A_{m,i}^{(1)} B_{i,p_1}^{(1,1)} &
+				\sum\limits_{i=1}^{n_1} A_{m,i}^{(1)} B_{i,1}^{(1,2)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_1} A_{m,i}^{(1)} B_{i,p_2}^{(1,2)} \\
+			\end{bmatrix} \\
+			&+
+			\begin{bmatrix}
+				\sum\limits_{i=1}^{n_2} A_{1,i}^{(2)} B_{i,1}^{(2,1)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_2} A_{1,i}^{(2)} B_{i,p_1}^{(2,1)} &
+				\sum\limits_{i=1}^{n_2} A_{1,i}^{(2)} B_{i,1}^{(2,2)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_2} A_{1,i}^{(2)} B_{i,p_2}^{(2,2)} \\
+				\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+				\sum\limits_{i=1}^{n_2} A_{m,i}^{(2)} B_{i,1}^{(2,1)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_2} A_{m,i}^{(2)} B_{i,p_1}^{(2,1)} &
+				\sum\limits_{i=1}^{n_2} A_{m,i}^{(2)} B_{i,1}^{(2,2)} &
+				\cdots &
+				\sum\limits_{i=1}^{n_2} A_{m,i}^{(2)} B_{i,p_2}^{(2,2)} \\
+			\end{bmatrix} \\
+			&= \lbrack \bm{A}^{(1)} \bm{B}^{(1,1)} , \bm{A}^{(1)} \bm{B}^{(1,2)} \rbrack + \lbrack \bm{A}^{(2)} \bm{B}^{(2,1)} , \bm{A}^{(2)} \bm{B}^{(2,2)} \rbrack \\
+			&= \lbrack \bm{A}^{(1)} \bm{B}^{(1,1)} + \bm{A}^{(2)} \bm{B}^{(2,1)} , \bm{A}^{(1)} \bm{B}^{(1,2)} + \bm{A}^{(2)} \bm{B}^{(2,2)} \rbrack
+		\end{split}
+	\end{equation*}
+	\normalsize
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.5.19.}
+	Show that
+	\begin{math}
+		(\bm{ABC})^{-1} = \bm{C}^{-1} \bm{B}^{-1} \bm{A}^{-1}
+	\end{math}
+	where
+	\begin{math}
+		\bm{A} , \bm{B} , \bm{C} \in \mathbb{R}^{n \times n}
+	\end{math}
+	are non-singular.
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} , \bm{B} , \bm{C} \in \mathbb{R}^{n \times n}
+	\end{math}
+	be non-singular.
+	\begin{equation*}
+		\begin{split}
+			(\bm{C}^{-1} \bm{B}^{-1} \bm{A}^{-1}) (\bm{ABC}) &= \bm{C}^{-1} \bm{B}^{-1} \bm{A}^{-1} \bm{ABC} \\
+			&= \bm{C}^{-1} \bm{B}^{-1} (\bm{A}^{-1} \bm{A}) \bm{BC} \\
+			&= \bm{C}^{-1} \bm{B}^{-1} \bm{I}_n \bm{BC} \\
+			&= \bm{C}^{-1} \bm{B}^{-1} \bm{BC} \\
+			&= \bm{C}^{-1} (\bm{B}^{-1} \bm{B}) \bm{C} \\
+			&= \bm{C}^{-1} \bm{I}_n \bm{C} \\
+			&= \bm{C}^{-1} \bm{C} \\
+			&= \bm{I}_n
+		\end{split}
+	\end{equation*}
+	Then, by definition 2.5.16. , we get
+	\begin{math}
+		(\bm{ABC})^{-1} = \bm{C}^{-1} \bm{B}^{-1} \bm{A}^{-1} .
+	\end{math}
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.5.22.}
+	Show the Woodbury formula
+	\begin{equation}
+		\label{woodbury}
+		(\bm{A} + \bm{B} \bm{D}^{-1} \bm{C})^{-1} = \bm{A}^{-1} - \bm{A}^{-1} \bm{B} (\bm{D} + \bm{C} \bm{A}^{-1} \bm{B})^{-1} \bm{C} \bm{A}^{-1} .
+	\end{equation}
+	where
+	\begin{math}
+		\bm{A} , \bm{B} , \bm{C},
+	\end{math}
+	and $\bm{D}$ are matrices with the correct size.
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} \in \mathbb{R}^{n \times n} , \bm{B} , \bm{C} ,
+	\end{math}
+	and, $\bm{D}$ be matrices with the correct size.
+	\begin{equation*}
+		\begin{split}
+			&(\bm{A}^{-1} - \bm{A}^{-1} \bm{B} (\bm{D} + \bm{C} \bm{A}^{-1} \bm{B})^{-1} \bm{C} \bm{A}^{-1})(\bm{A} + \bm{B} \bm{D}^{-1} \bm{C}) \\
+			=& (\bm{A}^{-1} - \bm{A}^{-1} \bm{B} (\bm{D} + \bm{C} \bm{A}^{-1} \bm{B})^{-1} \bm{C} \bm{A}^{-1}) \bm{A} \\
+			&+ (\bm{A}^{-1} - \bm{A}^{-1} \bm{B} (\bm{D} + \bm{C} \bm{A}^{-1} \bm{B})^{-1} \bm{C} \bm{A}^{-1}) \bm{B} \bm{D}^{-1} \bm{C} \\
+			=& \bm{I}_n - \bm{A}^{-1} \bm{B} (\bm{D} + \bm{C} \bm{A}^{-1} \bm{B})^{-1} \bm{C} \\
+			&+ \bm{A}^{-1} \bm{B} \bm{D}^{-1} \bm{C} - \bm{A}^{-1} \bm{B} (\bm{D} + \bm{C} \bm{A}^{-1} \bm{B})^{-1} \bm{C} \bm{A}^{-1} \bm{B} \bm{D}^{-1} \bm{C} \\
+			=& \bm{I}_n + \bm{A}^{-1} \bm{B} \bm{D}^{-1} \bm{C} - \bm{A}^{-1} \bm{B} (\bm{D} + \bm{C} \bm{A}^{-1} \bm{B})^{-1} (\bm{D} \bm{D}^{-1} + \bm{C} \bm{A}^{-1} \bm{B} \bm{D}^{-1}) \bm{C} \\
+			=& \bm{I}_n + \bm{A}^{-1} \bm{B} \bm{D}^{-1} \bm{C} - \bm{A}^{-1} \bm{B} (\bm{D} + \bm{C} \bm{A}^{-1} \bm{B})^{-1} (\bm{D} + \bm{C} \bm{A}^{-1} \bm{B}) \bm{D}^{-1} \bm{C} \\
+			=& \bm{I}_n + \bm{A}^{-1} \bm{B} \bm{D}^{-1} \bm{C} - \bm{A}^{-1} \bm{B} \bm{D}^{-1} \bm{C} \\
+			=& \bm{I}_n
+		\end{split}
+	\end{equation*}
+	Then, by definition 2.5.16. , we get $(\ref{woodbury})$.
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.5.25.}
+	Let
+	\begin{math}
+		\bm{A} = \lbrack \bm{a}_1 , \ldots , \bm{a}_m \rbrack^\mathrm{T} \in \mathbb{R}^{m \times n} .
+	\end{math}
+	Note that $i$-th row of $\bm{A}$ is $\bm{a}_i^\mathrm{T}$. Show that,
+	\begin{math}
+		\forall k \in \mathbb{N}_m,
+	\end{math}
+	\begin{equation}
+		\label{ex2525}
+		\bm{e}_k^\mathrm{T} \bm{A} = \bm{a}_k^\mathrm{T}
+	\end{equation}
+	where $\bm{e}_k$ is a unit vector with $k$-th entry one and the other entries zero.
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} = \lbrack \bm{a}_1 , \ldots , \bm{a}_m \rbrack^\mathrm{T} \in \mathbb{R}^{m \times n}
+	\end{math}
+	and
+	\begin{math}
+		k \in \mathbb{N}_m .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\bm{e}_k^\mathrm{T} \bm{A} &=
+			\bm{e}_k^\mathrm{T}
+			\begin{bmatrix}
+				A_{1,1} & \cdots & A_{1,n} \\
+				\vdots & \ddots & \vdots \\
+				A_{m,1} & \cdots & A_{m,n}
+			\end{bmatrix} \\
+			&= \lbrack A_{k,1} , \ldots , A_{k,n} \rbrack \\
+		\end{split}
+	\end{equation*}
+	Since $i$-th row of $\bm{A}$ is $\bm{a}^\mathrm{T}$,
+	\begin{equation*}
+		\lbrack A_{k,1} , \ldots , A_{k,n} \rbrack = \bm{a}_k^\mathrm{T} .
+	\end{equation*}
+	Thus, $(\ref{ex2525})$ holds.
+\end{proof}
+
+\begin{itembox}[l]{Exercise 2.5.27.}
+	Let
+	\begin{math}
+		\bm{A} = \lbrack \bm{a}_1 , \ldots , \bm{a}_m \rbrack \in \mathbb{R}^{n \times m} .
+	\end{math}
+	Note that $i$-th column of $\bm{A}$ is $\bm{a}_i$. Let $\bm{x} \in \mathbb{R}^n$ and $k \in \mathbb{N}_m$. Show that
+	\begin{equation}
+		\langle \bm{e}_k , \bm{A}^\mathrm{T} \bm{x} \rangle = \langle \bm{a}_k , \bm{x} \rangle
+	\end{equation}
+	where $\bm{e}_k$ is a unit vector with $k$-th entry one and the other entries zero.
+\end{itembox}
+
+\begin{proof}
+	Let
+	\begin{math}
+		\bm{A} = \lbrack \bm{a}_1 , \ldots , \bm{a}_m \rbrack \in \mathbb{R}^{n \times m} ,
+	\end{math}
+	\begin{math}
+		\bm{x} \in \mathbb{R}^n
+	\end{math}
+	and
+	\begin{math}
+		k \in \mathbb{N}_m .
+	\end{math}
+	\begin{equation*}
+		\begin{split}
+			\bm{A}^\mathrm{T} \bm{x} &=
+			\begin{bmatrix}
+				A_{1,1} & \cdots & A_{n,1} \\
+				\vdots & \ddots & \vdots \\
+				A_{1,m} & \cdots & A_{n,m}
+			\end{bmatrix}
+			\begin{bmatrix}
+				x_1 \\
+				\vdots \\
+				x_n
+			\end{bmatrix} \\
+			&=
+			\begin{bmatrix}
+				\bm{a}_1^\mathrm{T} \bm{x} \\
+				\vdots \\
+				\bm{a}_m^\mathrm{T} \bm{x}
+			\end{bmatrix}
+		\end{split}
+	\end{equation*}
+	Thus,
+	\begin{equation*}
+		\begin{split}
+			\langle \bm{e}_k , \bm{A}^\mathrm{T} \bm{x} \rangle 
+			&= \bm{a}_k^\mathrm{T} \bm{x} \\
+			&= \langle \bm{a}_k , \bm{x} \rangle .
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+\end{document}
